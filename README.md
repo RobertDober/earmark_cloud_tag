@@ -26,12 +26,3 @@
       [applications: [:earmark_tag_cloud]]
     end
     ```
-
-## COPYRIGHT & LICENSE
-
-Apache 2 License
-
-Copyright © 2016 RobertDober, robert.dober@gmail.com.
-Copyright © 2014 Dave Thomas, The Pragmatic Programmers. (readme mix task)
-
-See file `LICENSE` for details.
