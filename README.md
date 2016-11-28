@@ -1,10 +1,8 @@
 # EarmarkTagCloud
 
-An [Earmark] Plugin to create a cloud tag.
-
 
 <!-- moduledoc: EarmarkTagCloud -->
-  An Earmark Plugin to easily create tag clouds inside Markdown Documents.
+  An [Earmark](https://github.com/pragdave/earmark) Plugin to easily create tag clouds inside Markdown Documents.
 
 
 <!-- endmoduledoc: EarmarkTagCloud -->

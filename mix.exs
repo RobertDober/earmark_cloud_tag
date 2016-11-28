@@ -1,3 +1,4 @@
+Code.eval_file "tasks/readme.exs"
 defmodule EarmarkTagCloud.Mixfile do
   use Mix.Project
 
