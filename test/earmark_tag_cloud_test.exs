@@ -1,5 +1,6 @@
 defmodule EarmarkTagCloudTest do
   use ExUnit.Case
+  import Support.Render
   doctest EarmarkTagCloud
 
   describe "some simple examples" do
@@ -17,6 +18,4 @@ defmodule EarmarkTagCloudTest do
   end
 
 
-  defp render_lines(lines), do: lines |> prepare_lines() |> EarmarkTagCloud.render()
-  defp prepare_lines(lines), do: Enum.zip(lines, (1..Enum.count(lines)))
 end

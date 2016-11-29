@@ -8,19 +8,19 @@ defmodule EarmarkTagCloud do
 
     If the plugin lines are
           
-        $$ ruby 10 100 10
-        $$ elixir 40 800 100
+        $$ ruby 10 100 4
+        $$ elixir 40 800 12
 
     Earmark would pass in these lines as the `doc` array in the following doctest
 
         iex> doc = [
-        ...> { "ruby 10 100 10", 1},
-        ...> { "elixir 40 800 100", 2},
+        ...> { "ruby 10 100 4", 1},
+        ...> { "elixir 40 800 12", 2},
         ...> ] 
         ...> EarmarkTagCloud.render(doc)
         {[ "<div class=\\"earmark-tag-cloud\\" style=\\"font-family: Arial;\\">",
            "  <span style=\\"color: #525252; font-size: 10pt; font-weight: 100;\\">ruby</span>",
-           "  <span style=\\"color: #ffffff; font-size: 40pt; font-weight: 800;\\">elixir</span>",
+           "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">elixir</span>",
            "</div>"
         ], []} 
 
