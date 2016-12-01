@@ -40,6 +40,7 @@ defmodule EarmarkTagCloud.Mixfile do
     EarmarkTagCloud is a plugin for Earmark allowing for simple Tag Cloud generation.
     """
   end
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:dev), do: ["lib", "test/support", "examples"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "examples"]
   defp elixirc_paths(_),     do: ["lib"]
 end

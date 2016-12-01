@@ -25,6 +25,16 @@ defmodule EarmarkTagCloud do
         ], []} 
 
 
+    As we can see from the example above the three numeric values above are specifiying
+
+    * font size in pts
+
+    * font weight
+
+    * and a gray scale value between 0 (white) and 12 (black) that matches to 13 gamma corrected
+      shades of gray (you can change the settings to more grades, even 50, if you want.
+      c.f. Parameterization)
+
 
     ## COPYRIGHT & LICENSE
 

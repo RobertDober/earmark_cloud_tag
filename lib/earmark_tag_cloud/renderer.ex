@@ -3,13 +3,18 @@ defmodule EarmarkTagCloud.Renderer do
   import EarmarkTagCloud.GammaCorrection
   
   def render(parsed_lines) do 
-    with context_lines <- parsed_lines |> make_context() do
-    end
+    parsed_lines |> Enum.map_reduce(default_values, &context_line/2) |> format_lines()
   end
 
-  def make_context(parsed_lines) do
-    with {lines, settings} <- parsed_lines |> Enum.map_reduce(default_values, &context_line/2) do
-    end
+
+  defp format_lines(lines_and_settings) do
+    _format_lines(lines_and_settings, {[], []})
+  end
+
+  defp _format_lines({[],_},{output_lines, errors}), do: { Enum.reverse(output_lines), Enum.reverse(errors) }
+  defp _format_lines({[x|rest], settings}, _) do
+    IO.inspect x
+    _format_lines({rest, settings}, {[], []})
   end
 
   defp context_line({:set, key, value}, settings) do

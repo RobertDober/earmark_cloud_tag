@@ -13,7 +13,7 @@ defmodule EarmarkTagCloud.GammaCorrection do
     Therefore
 
         iex> make_gray(99, %{"scales" => 100, "gamma" => 2.2})
-        {:ok, "000000"}
+        {:ok, "1f1f1f"}
 
         iex> make_gray(0, %{"scales" => 100, "gamma" => 2.2})
         {:ok, "ffffff"}
