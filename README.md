@@ -3,8 +3,9 @@
 
 ## Concerning Hex
 
-This plugin (as all plugins) depend on `Earmark` v1.1.  Before it is released I cannot push this package to hex. If you want to use this plugin you need to get
-you can clone this repo and use the github dependency to use a bleeding edge but stable version of Earmark.
+This plugin (as all plugins) depends on `Earmark` v1.1.  Before it is released I cannot push this package to hex.
+
+If you want to use this plugin you you can clone this repo and use the github dependency to use a bleeding edge but stable version of Earmark.
 <!-- moduledoc: EarmarkTagCloud -->
   An [Earmark](https://github.com/pragdave/earmark) Plugin to easily create tag clouds inside Markdown Documents.
 
