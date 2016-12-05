@@ -17,11 +17,11 @@ defmodule EarmarkTagCloud do
         ...> { "ruby 10 100 4", 1},
         ...> { "elixir 40 800 12", 2},
         ...> ] 
-        ...> EarmarkTagCloud.render(doc)
-        {[ "<div class=\\"earmark-tag-cloud\\" style=\\"font-family: Arial;\\">",
-           "  <span style=\\"color: #d4d4d4; font-size: 10pt; font-weight: 100;\\">ruby</span>",
-           "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">elixir</span>",
-           "</div>"
+        ...> EarmarkTagCloud.as_html(doc)
+        {[ "<div class=\\"earmark-tag-cloud\\" style=\\"font-family: Arial;\\">\\n",
+           "  <span style=\\"color: #d4d4d4; font-size: 10pt; font-weight: 100;\\">ruby</span>\\n",
+           "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">elixir</span>\\n",
+           "</div>\\n"
         ], []} 
 
 
@@ -46,7 +46,7 @@ defmodule EarmarkTagCloud do
 
     See file `LICENSE` for details.
   """
-  def render(lines) do
+  def as_html(lines) do
     lines
     |> Enum.map(&EarmarkTagCloud.Parser.parse_line/1)
     |> EarmarkTagCloud.Renderer.render()

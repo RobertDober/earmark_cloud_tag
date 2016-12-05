@@ -8,6 +8,7 @@ defmodule EarmarkTagCloud.Mixfile do
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      description: description(),
+     escript: escript_config(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps()]
@@ -31,7 +32,8 @@ defmodule EarmarkTagCloud.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:earmark, ">= 1.0.9", github: "pragdave/earmark", branch: "for_plugins"},
+      # {:ex_doc, ">= 0.0.0", only: :dev},
     ]
   end
 
@@ -43,4 +45,8 @@ defmodule EarmarkTagCloud.Mixfile do
   defp elixirc_paths(:dev), do: ["lib", "test/support", "examples"]
   defp elixirc_paths(:test), do: ["lib", "test/support", "examples"]
   defp elixirc_paths(_),     do: ["lib"]
+
+  defp escript_config do
+    [ main_module: EarmarkTagCloud.CLI ]
+  end
 end
