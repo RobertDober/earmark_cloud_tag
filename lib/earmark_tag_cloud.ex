@@ -7,7 +7,7 @@ defmodule EarmarkTagCloud do
     is a simple example
 
     If the plugin lines are
-          
+
         $$ ruby 10 100 4
         $$ elixir 40 800 12
 
@@ -16,13 +16,13 @@ defmodule EarmarkTagCloud do
         iex> doc = [
         ...> { "ruby 10 100 4", 1},
         ...> { "elixir 40 800 12", 2},
-        ...> ] 
+        ...> ]
         ...> EarmarkTagCloud.as_html(doc)
         {[ "<div class=\\"earmark-tag-cloud\\" style=\\"font-family: Arial;\\">\\n",
            "  <span style=\\"color: #d4d4d4; font-size: 10pt; font-weight: 100;\\">ruby</span>\\n",
            "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">elixir</span>\\n",
            "</div>\\n"
-        ], []} 
+        ], []}
 
 
     As we can see from the example above the three numeric values above are specifiying

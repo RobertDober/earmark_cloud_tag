@@ -11,6 +11,7 @@ defmodule EarmarkTagCloud.Mixfile do
      escript: escript_config(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     package: package(),
      deps: deps()]
   end
 
@@ -48,5 +49,18 @@ defmodule EarmarkTagCloud.Mixfile do
 
   defp escript_config do
     [ main_module: EarmarkTagCloud.CLI ]
+  end
+
+  defp package do
+    [
+      files:       [ "lib", "mix.exs", "README.md", "LICENSE" ],
+      maintainers: [
+                     "Robert Dober <robert.dober@gmail.com>",
+                   ],
+      licenses:    [ "Apache 2 (see the file LICENSE for details)" ],
+      links:       %{
+                       "GitHub" => "https://github.com/RobertDober/earmark_tag_cloud",
+                   }
+    ]
   end
 end
