@@ -22,7 +22,7 @@ defmodule EarmarkTagCloud.GammaCorrection do
         {:ok, "717171"}
 
         iex> make_gray(13, %{"scales" => 12, "gamma" => 2.2})
-        {:error, "gray scale value 13 is out of range (0..12)"}
+        {:error, "value for gray-scale out of legal range. Actual: 13, Allowed: 0..12"}
 
      Or, if you must
 
@@ -31,7 +31,7 @@ defmodule EarmarkTagCloud.GammaCorrection do
    
   """
   def make_gray(gray_scale, %{"scales" => scales, "gamma" => gamma}) when gray_scale > scales do
-    {:error, "gray scale value #{gray_scale} is out of range (0..#{scales})"}
+    {:error, "value for gray-scale out of legal range. Actual: #{gray_scale}, Allowed: 0..#{scales}"}
   end 
   def make_gray(gray_scale, %{"scales" => scales, "gamma" => gamma}) do
     gamma_correct((scales - gray_scale) / scales, gamma)
