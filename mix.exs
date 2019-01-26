@@ -33,7 +33,7 @@ defmodule EarmarkTagCloud.Mixfile do
       {:earmark, "~> 1.3"},
       {:extractly, "~> 0.1", only: :dev},
       {:excoveralls, "~> 0.10.3", only: :test},
-      # {:ex_doc, ">= 0.0.0", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev},
     ]
   end
 

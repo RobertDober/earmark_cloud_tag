@@ -4,7 +4,7 @@ defmodule EarmarkTagCloud.Renderer do
   
   def render(parsed_lines) do 
     parsed_lines
-    |> Enum.reduce({[], default_values}, &remove_and_calc_settings/2)
+    |> Enum.reduce({[], default_values()}, &remove_and_calc_settings/2)
     |> format_lines({["</div>\n"], []})
   end
 
@@ -32,7 +32,10 @@ defmodule EarmarkTagCloud.Renderer do
   end
 
   defp div_line(settings) do
-    ~s(<div #{div_id(settings)}class="#{settings["div-classes"]}" style="font-family: #{settings["font-family"]};">\n)
+    case settings["font-family"] do
+      nil -> ~s(<div #{div_id(settings)}class="#{settings["div-classes"]}">\n)
+      font_family -> ~s(<div #{div_id(settings)}class="#{settings["div-classes"]}" style="font-family: #{font_family};">\n)
+    end
   end
   defp div_id(%{"div-id" => div_id}), do: ~s(id="#{div_id}" )
   defp div_id(_), do: ""
@@ -48,6 +51,6 @@ defmodule EarmarkTagCloud.Renderer do
     "scales"      => 12,
     "gamma"       => 2.2,
     "div-classes" => "earmark-tag-cloud",
-    "font-family" => "Arial"
+    "font-family" => nil
   }
 end

@@ -53,7 +53,7 @@ defmodule EarmarkTagCloud.CLI do
       IO.puts( version )
   end
 
-  defp process({io_device, options}) do
+  defp process({io_device, _options}) do
     content = IO.stream(io_device, :line) |> Enum.to_list
     
     {html, errors} = Earmark.as_html(content, Earmark.Plugin.define(EarmarkTagCloud))

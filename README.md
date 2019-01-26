@@ -23,7 +23,7 @@ and any changes you make in this file will most likely be lost
       ...> { "elixir 40 800 12", 2},
       ...> ]
       ...> EarmarkTagCloud.as_html(doc)
-      {[ "<div class=\"earmark-tag-cloud\" style=\"font-family: Arial;\">\n",
+      {[ "<div class=\"earmark-tag-cloud\">\n",
          "  <span style=\"color: #d4d4d4; font-size: 10pt; font-weight: 100;\">ruby</span>\n",
          "  <span style=\"color: #000000; font-size: 40pt; font-weight: 800;\">elixir</span>\n",
          "</div>\n"
@@ -39,6 +39,22 @@ and any changes you make in this file will most likely be lost
   * and a gray scale value between 0 (white) and 12 (black) that matches to 13 gamma corrected
     shades of gray (you can change the settings to more grades, even 50, if you want.
     c.f. Parameterization)
+
+  We can also set parameters like the font-family, or the div-classes
+
+      iex> doc = [
+      ...> { "set font-family Times", 1},
+      ...> { "set div-classes my-tags", 2},
+      ...> { "ruby 10 100 4", 3},
+      ...> { "elixir 40 800 12", 4},
+      ...> ]
+      ...> EarmarkTagCloud.as_html(doc)
+      {[ "<div class=\"my-tags\" style=\"font-family: Times;\">\n",
+         "  <span style=\"color: #d4d4d4; font-size: 10pt; font-weight: 100;\">ruby</span>\n",
+         "  <span style=\"color: #000000; font-size: 40pt; font-weight: 800;\">elixir</span>\n",
+         "</div>\n"
+      ], []}
+
 
 
 
