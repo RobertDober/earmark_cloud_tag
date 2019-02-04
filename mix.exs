@@ -3,7 +3,7 @@ defmodule EarmarkTagCloud.Mixfile do
 
   def project do
     [app: :earmark_tag_cloud,
-     version: "0.1.1",
+     version: "0.1.2",
      elixir: "~> 1.8",
      elixirc_paths: elixirc_paths(Mix.env),
      description: description(),
@@ -33,7 +33,7 @@ defmodule EarmarkTagCloud.Mixfile do
       {:earmark, "~> 1.3"},
       {:extractly, "~> 0.1", only: :dev},
       {:excoveralls, "~> 0.10.3", only: :test},
-      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:ex_doc, "~> 0.19", only: :dev},
     ]
   end
 

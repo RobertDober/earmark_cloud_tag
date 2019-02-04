@@ -49,12 +49,32 @@ defmodule EarmarkTagCloud do
            "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">elixir</span>\\n",
            "</div>\\n"
         ], []}
-
-
   """
   def as_html(lines) do
     lines
     |> Enum.map(&EarmarkTagCloud.Parser.parse_line/1)
     |> EarmarkTagCloud.Renderer.render()
+  end
+
+  @doc """
+  This is exposed to be used without Elixir, e.g. in a Phoenix App Template
+    
+
+        iex(1)> EarmarkTagCloud.one_tag("elixir 40 800 12")
+        {:ok, "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">elixir</span>\\n"}
+
+  """
+  def one_tag(tag_spec, _options \\ []) do
+    case EarmarkTagCloud.Parser.parse_line({tag_spec, 0}) do
+      {:tag, _, _, _} = parsed -> _one_tag(parsed)
+      _                        -> {:error, "Only tags allowed, no set directive"}
+    end
+  end
+
+  defp _one_tag(parsed) do
+    case EarmarkTagCloud.Renderer.render([parsed]) do
+      { output, [] } -> {:ok, Enum.at(output, -2)} 
+      { _, errors }  -> {:error, errors}
+    end
   end
 end
