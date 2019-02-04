@@ -63,16 +63,21 @@ defmodule EarmarkTagCloud do
         iex(1)> EarmarkTagCloud.one_tag("elixir 40 800 12")
         {:ok, "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">elixir</span>\\n"}
 
+  In these cases overriding the generated tag (`span` might be useful)
+
+        iex(2)> EarmarkTagCloud.one_tag("Erlang 20 600 8", tag: "p")
+        {:ok, "  <p style=\\"color: #9b9b9b; font-size: 20pt; font-weight: 600;\\">Erlang</p>\\n"}
+
   """
-  def one_tag(tag_spec, _options \\ []) do
+  def one_tag(tag_spec, options \\ []) do
     case EarmarkTagCloud.Parser.parse_line({tag_spec, 0}) do
-      {:tag, _, _, _} = parsed -> _one_tag(parsed)
+      {:tag, _, _, _} = parsed -> _one_tag(parsed, options)
       _                        -> {:error, "Only tags allowed, no set directive"}
     end
   end
 
-  defp _one_tag(parsed) do
-    case EarmarkTagCloud.Renderer.render([parsed]) do
+  defp _one_tag(parsed, options) do
+    case EarmarkTagCloud.Renderer.render([parsed], options) do
       { output, [] } -> {:ok, Enum.at(output, -2)} 
       { _, errors }  -> {:error, errors}
     end

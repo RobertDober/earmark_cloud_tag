@@ -6,6 +6,8 @@ It has been generated from a template by Extractly (https://github.com/RobertDob
 and any changes you make in this file will most likely be lost
 -->
 
+## Usage with Earmark
+
   An [Earmark](https://github.com/pragdave/earmark) Plugin to easily create tag clouds inside Markdown Documents.
 
   In its default configuration it translates a list of lines containing keywords with three metric values to html, here
@@ -55,6 +57,19 @@ and any changes you make in this file will most likely be lost
          "</div>\n"
       ], []}
 
+
+## Usage without Earmark
+
+This is exposed to be used without Elixir, e.g. in a Phoenix App Template
+  
+
+      iex(1)> EarmarkTagCloud.one_tag("elixir 40 800 12")
+      {:ok, "  <span style=\"color: #000000; font-size: 40pt; font-weight: 800;\">elixir</span>\n"}
+
+In these cases overriding the generated tag (`span` might be useful)
+
+      iex(2)> EarmarkTagCloud.one_tag("Erlang 20 600 8", tag: "p")
+      {:ok, "  <p style=\"color: #9b9b9b; font-size: 20pt; font-weight: 600;\">Erlang</p>\n"}
 
 
 

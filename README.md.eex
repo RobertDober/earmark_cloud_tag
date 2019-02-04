@@ -2,7 +2,13 @@
 
 <%= xtra.do_not_edit_warning %>
 
+## Usage with Earmark
+
 <%= xtra.moduledoc "EarmarkTagCloud" %>
+
+## Usage without Earmark
+
+<%= xtra.functiondoc "EarmarkTagCloud.one_tag/2" %>
 
 ## COPYRIGHT & LICENSE
 

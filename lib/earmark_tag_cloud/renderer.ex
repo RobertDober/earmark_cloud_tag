@@ -2,16 +2,19 @@ defmodule EarmarkTagCloud.Renderer do
   
   import EarmarkTagCloud.GammaCorrection
   
-  def render(parsed_lines) do 
+  def render(parsed_lines, options \\ []) do 
+    tag = Keyword.get(options, :tag, "span")
+    settings = Map.put(default_values(), "tag", tag) 
+
     parsed_lines
-    |> Enum.reduce({[], default_values()}, &remove_and_calc_settings/2)
+    |> Enum.reduce({[], settings}, &remove_and_calc_settings/2)
     |> format_lines({["</div>\n"], []})
   end
 
 
   defp format_lines({[],settings},{output_lines, errors}), do: { [div_line(settings)|output_lines], errors }
   defp format_lines({[{:tag, text, params, lnb} | rest], settings}, {output, errors}) do 
-    case make_span(text, params, settings) do
+    case make_tag(text, params, settings) do
       {:error, _, msg} -> format_lines({rest, settings}, {output, [{:error, lnb, msg}|errors]})
       {:ok, span}      -> format_lines({rest, settings}, {[span|output], errors})
     end
@@ -24,7 +27,7 @@ defmodule EarmarkTagCloud.Renderer do
     {output, Map.put(settings, key, value)}
   end 
   defp remove_and_calc_settings({:tag, _, _, _} = tag , {output, settings}) do
-    # {make_span(text, values, settings), settings}
+    # {make_tag(text, values, settings), settings}
     {[tag | output], settings}
   end
   defp remove_and_calc_settings(error, {output, settings}) do
@@ -40,10 +43,11 @@ defmodule EarmarkTagCloud.Renderer do
   defp div_id(%{"div-id" => div_id}), do: ~s(id="#{div_id}" )
   defp div_id(_), do: ""
 
-  defp make_span(text, [size, weight, gray_scale], settings) do
+  defp make_tag(text, [size, weight, gray_scale], settings) do
+    tag = Map.get(settings, "tag")
     case make_gray(gray_scale, settings) do
       {:error, message} -> {:error, text, message}
-      {:ok, gray}       -> {:ok, ~s[  <span style="color: ##{gray}; font-size: #{size}pt; font-weight: #{weight};">#{text}</span>\n]}
+      {:ok, gray}       -> {:ok, ~s[  <#{tag} style="color: ##{gray}; font-size: #{size}pt; font-weight: #{weight};">#{text}</#{tag}>\n]}
     end
   end
 
@@ -51,6 +55,6 @@ defmodule EarmarkTagCloud.Renderer do
     "scales"      => 12,
     "gamma"       => 2.2,
     "div-classes" => "earmark-tag-cloud",
-    "font-family" => nil
+    "font-family" => nil,
   }
 end
