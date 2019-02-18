@@ -56,7 +56,7 @@ defmodule EarmarkTagCloud.CLI do
   defp process({io_device, _options}) do
     content = IO.stream(io_device, :line) |> Enum.to_list
     
-    {html, errors} = Earmark.as_html(content, Earmark.Plugin.define(EarmarkTagCloud))
+    {:ok, html, errors} = Earmark.as_html(content, Earmark.Plugin.define(EarmarkTagCloud))
 
     Enum.each(errors, fn {type, ln, msg} ->
       IO.puts(:stderr, "#{type}: lnb: #{ln} #{msg}")
