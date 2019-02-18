@@ -6,8 +6,17 @@ defmodule EarmarkTagCloud.Parser.ParseLineTest do
   doctest EarmarkTagCloud.Parser
 
   describe "legal tag specifications" do
-    test "explicit color" do
+    test "implicit color" do
       assert parse_with_lnb("elixir 1 2 3") == {:tag, "elixir", [1, 2, 3], 1}
+    end
+    test "explicit color" do
+      assert parse_with_lnb("elixir 1 2 #403020") == {:tag, "elixir", [1, 2, "403020"], 1}
+    end
+  end
+
+  describe "illegal tag specifications" do
+    test "incorrect color" do
+      assert parse_with_lnb("ruby 10 100 #abcde") == {:error, 1, "missing one or more of necessary integer values (font-size font-weight gray-scale) at end of tag specifcation"}
     end
   end
 

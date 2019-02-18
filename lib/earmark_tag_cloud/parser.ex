@@ -29,7 +29,7 @@ defmodule EarmarkTagCloud.Parser do
     # Tag text
     (.+)
     # Size, Weight, Color
-    \s+ (\d+) \s+ (\d+) \s+ (\d+) \s*$
+    \s+ (\d+) \s+ (\d+) \s+ (\d+|\#[0-9a-fA-F]{6}) \s*$
   '''x
   defp parse_tag({line, lnb}) do
     case Regex.run(@tag_spec, line) do
@@ -46,6 +46,8 @@ defmodule EarmarkTagCloud.Parser do
     numbas |> Enum.map(&int/1)
   end
 
+  defp int(numba)
+  defp int("#" <> numba), do: numba
   defp int(numba) do
     with {parsed, _} <- Integer.parse(numba), do: parsed
   end 

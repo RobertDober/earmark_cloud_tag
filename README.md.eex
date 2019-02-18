@@ -6,13 +6,24 @@
 [![Hex.pm](https://img.shields.io/hexpm/dw/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
 [![Hex.pm](https://img.shields.io/hexpm/dt/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
 
-## Usage with Earmark
+## Usage without Earmark
 
 <%= xtra.moduledoc "EarmarkTagCloud" %>
 
-## Usage without Earmark
-
 <%= xtra.functiondoc "EarmarkTagCloud.one_tag/2" %>
+
+## Usage with Earmark
+
+If the plugin lines are
+
+    $$ ruby 10 100 4
+    $$ elixir 40 800 12
+
+then call
+
+    Earmark.as_html(lines, Earmark.Plugin.define(EarmarkTagCloud))
+
+Please see [Earmark](https://github.com/pragdave/earmark)  for more details of how to use plugins
 
 ## COPYRIGHT & LICENSE
 
