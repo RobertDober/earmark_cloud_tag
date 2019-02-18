@@ -6,6 +6,10 @@ It has been generated from a template by Extractly (https://github.com/RobertDob
 and any changes you make in this file will most likely be lost
 -->
 
+[![Hex.pm](https://img.shields.io/hexpm/v/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
+[![Hex.pm](https://img.shields.io/hexpm/dw/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
+[![Hex.pm](https://img.shields.io/hexpm/dt/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
+
 ## Usage with Earmark
 
   An [Earmark](https://github.com/pragdave/earmark) Plugin to easily create tag clouds inside Markdown Documents.

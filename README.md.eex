@@ -2,6 +2,10 @@
 
 <%= xtra.do_not_edit_warning %>
 
+[![Hex.pm](https://img.shields.io/hexpm/v/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
+[![Hex.pm](https://img.shields.io/hexpm/dw/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
+[![Hex.pm](https://img.shields.io/hexpm/dt/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
+
 ## Usage with Earmark
 
 <%= xtra.moduledoc "EarmarkTagCloud" %>
