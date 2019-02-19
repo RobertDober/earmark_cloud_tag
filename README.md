@@ -6,6 +6,8 @@ It has been generated from a template by Extractly (https://github.com/RobertDob
 and any changes you make in this file will most likely be lost
 -->
 
+[![Build Status](https://travis-ci.org/RobertDober/earmark_tag_cloud.svg?branch=master)](https://travis-ci.org/RobertDober/earmark_tag_cloud)
+[![Coverage Status](https://coveralls.io/repos/github/RobertDober/earmark_tag_cloud/badge.svg?branch=master)](https://coveralls.io/github/RobertDober/earmark_tag_cloud?branch=master)
 [![Hex.pm](https://img.shields.io/hexpm/v/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
 [![Hex.pm](https://img.shields.io/hexpm/dw/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
 [![Hex.pm](https://img.shields.io/hexpm/dt/earmark_tag_cloud.svg)](https://hex.pm/packages/earmark_tag_cloud)
@@ -89,12 +91,15 @@ In these cases overriding the generated tag (`span` might be useful)
 
 ## Usage with Earmark
 
-If the plugin lines are
+If following  lines are
 
+    ... normal markdown
     $$ ruby 10 100 4
     $$ elixir 40 800 12
+    ... still more normal markdown
 
-then call
+read into `lines`
+
 
     Earmark.as_html(lines, Earmark.Plugin.define(EarmarkTagCloud))
 
