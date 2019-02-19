@@ -3,7 +3,7 @@ defmodule EarmarkTagCloud.Mixfile do
 
   def project do
     [app: :earmark_tag_cloud,
-     version: "0.1.3",
+     version: "0.1.4",
      elixir: "~> 1.8",
      elixirc_paths: elixirc_paths(Mix.env),
      description: description(),
