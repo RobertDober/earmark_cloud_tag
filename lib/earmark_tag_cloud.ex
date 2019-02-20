@@ -78,11 +78,25 @@ defmodule EarmarkTagCloud do
         iex(2)> EarmarkTagCloud.one_tag("Erlang 20 600 #0000aa", tag: "p")
         {:ok, "  <p style=\\"color: #0000aa; font-size: 20pt; font-weight: 600;\\">Erlang</p>\\n"}
 
+  Set directives make no sens in `one_tag`'s input and result therefor in an error
+
+        iex(3)> EarmarkTagCloud.one_tag("set font-family Times")
+        {:error, "Only tags are allowed in \`one_tag\`'s input, but was:\\n  set font-family Times"}
+
+  Other errors are returned as with `as_html`
+
+        iex(4)> EarmarkTagCloud.one_tag("ruby may be the best solution 12 1")
+        {
+          :error,
+          "missing one or more of necessary integer values (font-size font-weight gray-scale|color) at end of tag specifcation\\n--> ruby may be the best solution 12 1"
+        }
+
   """
   def one_tag(tag_spec, options \\ []) do
     case EarmarkTagCloud.Parser.parse_line({tag_spec, 0}) do
       {:tag, _, _, _} = parsed -> _one_tag(parsed, options)
-      _                        -> {:error, "Only tags allowed, no set directive\n-->#{tag_spec}"}
+      {:set, key, value}       -> {:error, "Only tags are allowed in `one_tag`'s input, but was:\n  set #{key} #{value}"}
+      {:error, _, message}     -> {:error, message}
     end
   end
 
