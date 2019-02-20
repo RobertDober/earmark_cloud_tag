@@ -82,7 +82,7 @@ defmodule EarmarkTagCloud do
   def one_tag(tag_spec, options \\ []) do
     case EarmarkTagCloud.Parser.parse_line({tag_spec, 0}) do
       {:tag, _, _, _} = parsed -> _one_tag(parsed, options)
-      _                        -> {:error, "Only tags allowed, no set directive"}
+      _                        -> {:error, "Only tags allowed, no set directive\n-->#{tag_spec}"}
     end
   end
 

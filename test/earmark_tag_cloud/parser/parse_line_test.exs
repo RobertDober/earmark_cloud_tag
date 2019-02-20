@@ -16,11 +16,11 @@ defmodule EarmarkTagCloud.Parser.ParseLineTest do
 
   describe "illegal tag specifications" do
     test "incorrect color" do
-      assert parse_with_lnb("ruby 10 100 #abcde") == {:error, 1, "missing one or more of necessary integer values (font-size font-weight gray-scale) at end of tag specifcation"}
+      assert parse_with_lnb("ruby 10 100 #abcde") == {:error, 1, "missing one or more of necessary integer values (font-size font-weight gray-scale|color) at end of tag specifcation\n--> ruby 10 100 #abcde"}
     end
   end
 
-  describe "legal paramerer setters" do
+  describe "legal parameter setters" do
     test "key value" do
       assert parse_with_lnb("set font-family Helvetica sans serif") == {:set, "font-family", "Helvetica sans serif"}
     end
@@ -30,8 +30,14 @@ defmodule EarmarkTagCloud.Parser.ParseLineTest do
     test "key float value" do
       assert parse_with_lnb("set gamma 2") == {:set, "gamma", 2.0}
     end
+  end
+
+  describe "illegal parameter setters" do
     test "missing value" do
-      assert parse_with_lnb("set font-family") == {:error, 1, "missing value for variable \"font-family\""}
+      assert parse_with_lnb("set font-family") == {:error, 1, "missing value for variable \"font-family\"\n--> set font-family"}
+    end
+    test "non numerical value" do
+      assert parse_with_lnb("set scales hello") == {:error, 1, "illegal value \"hello\" for key \"scales\"\n--> set scales hello"}
     end
   end
 
