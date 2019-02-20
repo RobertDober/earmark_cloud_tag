@@ -61,6 +61,18 @@ defmodule EarmarkTagCloud do
            "  <span style=\\"color: #0000ff; font-size: 40pt; font-weight: 800;\\">elixir</span>\\n",
            "</div>\\n"
         ], []}
+
+
+   Setting undefined variables results in errors too, good for catching typos or regressions if
+   variable names change in the future:
+
+        iex> EarmarkTagCloud.as_html([
+        ...>  {"set font-famiyl Helvetica", 42},
+        ...>  {"cool tag 40 800 #000000", 43}
+        ...>])
+        { ["<div class=\\"earmark-tag-cloud\\">\\n", "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">cool tag</span>\\n", "</div>\\n"],
+          [{:error, 42, "Undefined variable `font-famiyl`\\n--> set font-famiyl Helvetica\\n\\nDefined Variables: div-classes, div-id, font-family, gamma, scales, tag"}] }
+
   """
   def as_html(lines) do
     lines

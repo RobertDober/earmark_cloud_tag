@@ -25,10 +25,21 @@ defmodule EarmarkTagCloud.Parser do
     end
   end
 
-  defp parse_set(key, value, {line, lnb}) do
+  defp parse_set(key, value, {line, lnb}=input) do
     case translate(key, value) do
       :error -> {:error, lnb, "illegal value #{inspect value} for key #{inspect key}\n--> #{line}"}
-      parsed -> {:set, key, parsed}
+      parsed -> check_variable(key, parsed, input)
+    end
+  end
+
+  @defined_variables %{ "div-classes" => true, "div-id" => true, "font-family" => true, "gamma" => true, "scales" => true, "tag" => true}
+  defp check_variable(key, parsed, {line, lnb}) do
+    if Map.get(@defined_variables, key) do
+      {:set, key, parsed}
+    else
+      {:error, lnb,
+       "Undefined variable `#{key}`\n--> #{line}\n\nDefined Variables: #{Map.keys(@defined_variables) |> Enum.join(", ")}"
+       }
     end
   end
   @tag_spec ~r'''

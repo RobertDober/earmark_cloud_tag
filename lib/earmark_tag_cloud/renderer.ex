@@ -3,12 +3,12 @@ defmodule EarmarkTagCloud.Renderer do
   import EarmarkTagCloud.GammaCorrection
 
   def render(parsed_lines, options \\ []) do 
-  tag = Keyword.get(options, :tag, "span")
-  settings = Map.put(default_values(), "tag", tag) 
+    tag = Keyword.get(options, :tag, "span")
+    settings = Map.put(default_values(), "tag", tag) 
 
-  parsed_lines
-  |> Enum.reduce({[], settings}, &remove_and_calc_settings/2)
-  |> format_lines({["</div>\n"], []})
+    parsed_lines
+    |> Enum.reduce({[], settings}, &remove_and_calc_settings/2)
+    |> format_lines({["</div>\n"], []})
   end
 
   defp default_values, do: %{
