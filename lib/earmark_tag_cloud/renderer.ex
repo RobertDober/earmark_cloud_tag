@@ -3,12 +3,12 @@ defmodule EarmarkTagCloud.Renderer do
   import EarmarkTagCloud.GammaCorrection
 
   def render(parsed_lines, options \\ []) do 
-  tag = Keyword.get(options, :tag, "span")
-  settings = Map.put(default_values(), "tag", tag) 
+    tag = Keyword.get(options, :tag, "span")
+    settings = Map.put(default_values(), "tag", tag) 
 
-  parsed_lines
-  |> Enum.reduce({[], settings}, &remove_and_calc_settings/2)
-  |> format_lines({["</div>\n"], []})
+    parsed_lines
+    |> Enum.reduce({[], settings}, &remove_and_calc_settings/2)
+    |> format_lines({["</div>\n"], []})
   end
 
   defp default_values, do: %{
@@ -32,7 +32,7 @@ defmodule EarmarkTagCloud.Renderer do
   defp format_lines({[],settings},{output_lines, errors}), do: { [div_line(settings)|output_lines], errors }
   defp format_lines({[{:tag, text, params, lnb} | rest], settings}, {output, errors}) do 
   case make_tag(text, params, settings) do
-    {:error, _, msg} -> format_lines({rest, settings}, {output, [{:error, lnb, msg}|errors]})
+    {:error, _, msg} -> format_lines({rest, settings}, {output, [{:error, lnb, "#{msg}\n--> #{Enum.join([text|params], " ")}"} |errors]})
     {:ok, span}      -> format_lines({rest, settings}, {[span|output], errors})
   end
   end

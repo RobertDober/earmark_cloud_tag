@@ -61,6 +61,18 @@ defmodule EarmarkTagCloud do
            "  <span style=\\"color: #0000ff; font-size: 40pt; font-weight: 800;\\">elixir</span>\\n",
            "</div>\\n"
         ], []}
+
+
+   Setting undefined variables results in errors too, good for catching typos or regressions if
+   variable names change in the future:
+
+        iex> EarmarkTagCloud.as_html([
+        ...>  {"set font-famiyl Helvetica", 42},
+        ...>  {"cool tag 40 800 #000000", 43}
+        ...>])
+        { ["<div class=\\"earmark-tag-cloud\\">\\n", "  <span style=\\"color: #000000; font-size: 40pt; font-weight: 800;\\">cool tag</span>\\n", "</div>\\n"],
+          [{:error, 42, "Undefined variable `font-famiyl`\\n--> set font-famiyl Helvetica\\n\\nDefined Variables: div-classes, div-id, font-family, gamma, scales, tag"}] }
+
   """
   def as_html(lines) do
     lines
@@ -78,11 +90,25 @@ defmodule EarmarkTagCloud do
         iex(2)> EarmarkTagCloud.one_tag("Erlang 20 600 #0000aa", tag: "p")
         {:ok, "  <p style=\\"color: #0000aa; font-size: 20pt; font-weight: 600;\\">Erlang</p>\\n"}
 
+  Set directives make no sens in `one_tag`'s input and result therefor in an error
+
+        iex(3)> EarmarkTagCloud.one_tag("set font-family Times")
+        {:error, "Only tags are allowed in \`one_tag\`'s input, but was:\\n  set font-family Times"}
+
+  Other errors are returned as with `as_html`
+
+        iex(4)> EarmarkTagCloud.one_tag("ruby may be the best solution 12 1")
+        {
+          :error,
+          "missing one or more of necessary integer values (font-size font-weight gray-scale|color) at end of tag specifcation\\n--> ruby may be the best solution 12 1"
+        }
+
   """
   def one_tag(tag_spec, options \\ []) do
     case EarmarkTagCloud.Parser.parse_line({tag_spec, 0}) do
       {:tag, _, _, _} = parsed -> _one_tag(parsed, options)
-      _                        -> {:error, "Only tags allowed, no set directive"}
+      {:set, key, value}       -> {:error, "Only tags are allowed in `one_tag`'s input, but was:\n  set #{key} #{value}"}
+      {:error, _, message}     -> {:error, message}
     end
   end
 
